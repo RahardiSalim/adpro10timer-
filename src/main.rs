@@ -54,7 +54,6 @@ impl ArcWake for Task {
     }
 }
 
-
 impl Executor {
     fn run(&self) {
         while let Ok(task) = self.ready_queue.recv() {
@@ -78,6 +77,8 @@ fn main() {
         TimerFuture::new(Duration::new(2, 0)).await;
         println!("Rahardi's Komputer: done!");
     });
+
+    println!("(Added) Spawned the timer task and immediately continued execution.");
 
     drop(spawner);
 

@@ -1,0 +1,5 @@
+## Experiment 1.2: Understanding how it works.
+
+After calling `spawner.spawn(...)`, the program immediately prints the message `"(Added) Spawned the timer task and immediately continued execution."`. This shows that spawning an asynchronous task does not block the main thread. The async task runs independently and begins executing its own code, printing `"Rahardi's Komputer: howdy!"`. After that, it awaits `TimerFuture::new(...)`, which introduces a 2-second delay using a custom future. Once the timer completes, the task resumes and prints `"Rahardi's Komputer: done!"`. This behavior demonstrates how Rust's async runtime schedules and executes tasks in a non-blocking manner, allowing the main thread to continue while background tasks wait or perform work asynchronously.
+
+![Timer output screenshot](asset\timer.png)
