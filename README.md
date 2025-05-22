@@ -2,7 +2,7 @@
 
 After calling `spawner.spawn(...)`, the program immediately prints the message `"(Added) Spawned the timer task and immediately continued execution."`. This shows that spawning an asynchronous task does not block the main thread. The async task runs independently and begins executing its own code, printing `"Rahardi's Komputer: howdy!"`. After that, it awaits `TimerFuture::new(...)`, which introduces a 2-second delay using a custom future. Once the timer completes, the task resumes and prints `"Rahardi's Komputer: done!"`. This behavior demonstrates how Rust's async runtime schedules and executes tasks in a non-blocking manner, allowing the main thread to continue while background tasks wait or perform work asynchronously.
 
-![Timer output screenshot](asset\timer.png)
+![Timer output screenshot](asset/timer.png)
 
 ## Experiment 1.3: Multiple Spawn and Removing Drop
 
@@ -20,9 +20,9 @@ Spawning creates and schedules a new asynchronous task to be executed by the exe
   Together, they form a minimal async runtime system. Without dropping the spawner, the executor will never finish, even if all tasks are done. Without the executor, tasks are never run. Without the spawner, no tasks are ever scheduled. These three parts are tightly coupled to make async execution work correctly.
 
 **Screenshot 1: With `drop(spawner)`**
-![with drop](asset\with_drop.png)
+![with drop](asset/with_drop.png)
 
 **Screenshot 2: Without `drop(spawner)`**
-![no drop](asset\no_drop.png)
+![no drop](asset/no_drop.png)
 
 This experiment demonstrates that spawning allows multiple tasks to be scheduled concurrently. The spawner and executor must work together to execute these tasks. Dropping the spawner is essential to allow the executor to shut down properly. Without it, the program will hang, waiting for tasks that will never come. This experiment clarifies the relationship between components in a minimal async runtime and shows the importance of cleaning up properly.
