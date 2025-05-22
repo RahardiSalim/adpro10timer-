@@ -78,9 +78,23 @@ fn main() {
         println!("Rahardi's Komputer: done!");
     });
 
+    spawner.spawn(async {
+        println!("Rahardi's Komputer: howdy!");
+
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Rahardi's Komputer: done!");
+    });
+
+    spawner.spawn(async {
+        println!("Rahardi's Komputer: howdy!");
+
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Rahardi's Komputer: done!");
+    });
+
     println!("(Added) Spawned the timer task and immediately continued execution.");
 
-    drop(spawner);
+    // drop(spawner);
 
     executor.run();
 }
